@@ -13,5 +13,3 @@ WORKDIR /app
 # RUN ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
 RUN pip install -r requirements.txt
 RUN export DJANGO_SETTINGS_MODULE=SubtitleTimeTracker.settings
-#REMOVE the ssh keys
-RUN rm /root/.ssh/id_rsa
