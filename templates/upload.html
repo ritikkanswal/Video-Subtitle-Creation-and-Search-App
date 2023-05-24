@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Uploader</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'upload/styles.css' %}">
+
+</head>
+<body>
+  <header>
+    <div class="container1">
+      <h1>Video Uploader</h1>
+      <nav>
+        <ul>
+          <li><a href="/upload_video">Home</a></li>
+          <li><a href="/filter">Filter Videos</a></li>
+          <li><a href="/video_uploaded">Videos Uploaded</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="container2">
+    <h1>Video Uploader</h1>
+  
+    <form id="uploadForm" enctype="multipart/form-data">
+      <div class="con1">
+        <label for="videoTitle">Video Title:</label>
+        <input type="text" id="videoTitle" name="videoTitle" required>
+      </div>
+      <div>
+        <label for="videoFile" class="custom-file-upload">
+          <i class="fas fa-cloud-upload-alt"></i> Choose a Video
+        </label>
+        <input type="file" id="videoFile" name="videoFile" accept="video/*" required>
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+  
+
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
+  <script src="{% static 'upload/script.js' %}"></script>
+</body>
+</html>

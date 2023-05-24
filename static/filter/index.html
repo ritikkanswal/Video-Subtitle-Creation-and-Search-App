@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Filter</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container1">
+      <h1>Video Filter</h1>
+      <nav>
+        <ul>
+          <li><a href="/home/ritikkanswal/Documents/Low Level Design/upload/index.html">Home</a></li>
+          <li><a href="/home/ritikkanswal/Documents/Low Level Design/fiter/index.html">Filter Videos</a></li>
+          <li><a href="/home/ritikkanswal/Documents/Low Level Design/videos_uploaded/index.html">Videos Uploaded</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="filter-container">
+    <form>
+      <label for="video-select">Select Video:</label>
+      <select id="video-select"></select>
+      
+      <!-- <select id="video-select">
+        <option value="video1">Video 1</option>
+        <option value="video2">Video 2</option>
+        <option value="video3">Video 3</option>
+      </select> -->
+      
+      <label for="search-text">Search Text:</label>
+      <input type="text" id="search-text" placeholder="Enter search text">
+  
+      <button type="button" onclick="filterVideos()" class="filter-button">Filter</button>
+    </form>
+  </div>
+  <div class="result-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Text</th>
+        </tr>
+      </thead>
+      <tbody id="result-table">
+        <!-- Filtered results will be dynamically added here -->
+      </tbody>
+    </table>
+  </div>
+  
+  
+</body>
+</html>
+         

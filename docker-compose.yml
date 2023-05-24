@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - eco-wiser
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+
+  rabbit:
+    image: rabbitmq:3-management
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - eco-wiser
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  backend:
+    image: subtitletimetracker:latest
+    environment: 
+      - PYTHONUNBUFFERED=1
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      - db
+      - rabbit
+    expose:
+      - '8000'
+    ports:
+      - "8000:8000"
+    networks:
+      - eco-wiser
+    command: >
+      sh -c "
+        gunicorn SubtitleTimeTracker.wsgi:application -b 0.0.0.0:8000 -D
+        celery -A SubtitleTimeTracker worker -l info
+      "
+
+
+volumes:
+  mysql_data:
+
+networks:
+  eco-wiser:

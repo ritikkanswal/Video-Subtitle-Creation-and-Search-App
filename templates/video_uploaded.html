@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Details</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'videos_uploaded/styles.css' %}">
+</head>
+<body>
+  <header>
+    <div class="container1">
+      <h1>Video Uploader</h1>
+      <nav>
+        <ul>
+          <li><a href="/upload_video">Home</a></li>
+          <li><a href="/filter">Filter Videos</a></li>
+          <li><a href="/video_uploaded">Videos Uploaded</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="container">
+    <h1>Video Details</h1>
+    <table id="video-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Created At</th>
+          <th>Upload Status</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be dynamically added here -->
+      </tbody>
+    </table>
+  </div>
+  <script src="{% static 'videos_uploaded/script.js' %}"></script>
+</body>
+</html>
