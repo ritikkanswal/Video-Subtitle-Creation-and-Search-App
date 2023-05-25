@@ -24,6 +24,10 @@ fetch('http://13.50.129.179:8000/accounts/?format=json')
     upload_statusCell .textContent = video.upload_status;
     row.appendChild(upload_statusCell);
 
+    const subtitle_upload_statusCell = document.createElement('td');
+    subtitle_upload_statusCell .textContent = video.subtitle_upload_status;
+    row.appendChild(subtitle_upload_statusCell);
+
     const linkCell = document.createElement('td');
     const linkElement = document.createElement('a');
     linkElement.href = video.link;
