@@ -13,7 +13,7 @@ function filterVideos() {
     // const videoSelect = 1;
     // const searchText = 'GOOD';
 
-    const apiUrl = `http://127.0.0.1:8000/api/search/?video_id=${videoSelect}&search_text=${searchText}`;
+    const apiUrl = `http://13.50.129.179:8000/api/search/?video_id=${videoSelect}&search_text=${searchText}`;
 
     fetch(apiUrl)
     .then(response => response.json())
@@ -56,7 +56,7 @@ function filterVideos() {
 
 
 // Fetch the API to retrieve videos
-fetch('http://127.0.0.1:8000/accounts/?format=json')
+fetch('http://13.50.129.179:8000/accounts/?format=json')
   .then(response => response.json())
   .then(data => {
     // console.log(data)

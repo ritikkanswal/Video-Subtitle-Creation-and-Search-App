@@ -26,11 +26,7 @@ SECRET_KEY = 'django-insecure-fkl#l_l56gmkmn8%3o^*u1sjiqj5iq08zb@2w5497!!21ut^t)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "3.114.57.60",
-    '13.50.129.179'
-]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -107,7 +103,7 @@ DATABASES = {
           'ENGINE': 'mysql.connector.django',
           'NAME': os.environ.get('MYSQL_DATABASE'),
           'USER': os.environ.get('MYSQL_USER'),
-          'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+          'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD'),
           'HOST': os.environ.get('MYSQL_DATABASE_HOST'),
           'PORT': os.environ.get('MYSQL_DATABASE_PORT'),
           'CONN_MAX_AGE': 120,

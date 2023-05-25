@@ -39,7 +39,7 @@ const videoFile = videoFileInput.files[0]; // Get the selected file
 // Example: Display the extracted values in the console
 console.log('Video Title:', videoTitle);
 console.log('Video File:', videoFile);
-const url = 'http://127.0.0.1:8000/api/upload/';
+const url = 'http://13.50.129.179:8000/api/upload/';
 const formData = new FormData();
 formData.append('title', videoTitle);
 formData.append('document', videoFile);

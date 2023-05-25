@@ -1,5 +1,5 @@
 
-fetch('http://127.0.0.1:8000/accounts/?format=json')
+fetch('http://13.50.129.179:8000/accounts/?format=json')
 .then(response => response.json())
 .then(data => {
   const videoTable = document.getElementById('video-table');
