@@ -7,6 +7,6 @@ class Videos(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     upload_status = models.CharField(max_length=100,default="PENDING")
-    
+    subtitle_upload_status = models.CharField(max_length=100,default="PENDING")
     class Meta:
         verbose_name_plural = 'Videos'
