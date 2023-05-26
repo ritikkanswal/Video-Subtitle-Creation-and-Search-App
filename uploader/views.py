@@ -107,6 +107,9 @@ def upload_to_s3(request):
 
     return HttpResponse(s3_url)
 
-
+@csrf_exempt
+def file_name(request):
+    file = file=request.FILES.get('document')
+    return JsonResponse({'results': file.name})
 
 
