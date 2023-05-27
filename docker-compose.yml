@@ -42,8 +42,8 @@ services:
       - eco-wiser
     command: >
       sh -c "
-        gunicorn SubtitleTimeTracker.wsgi:application -b 0.0.0.0:8000 -D
-        celery -A SubtitleTimeTracker worker -l info
+        celery -A SubtitleTimeTracker worker -l info --detach
+        gunicorn SubtitleTimeTracker.wsgi:application -b 0.0.0.0:8000 --log-level debug --timeout 0
       "
 
 

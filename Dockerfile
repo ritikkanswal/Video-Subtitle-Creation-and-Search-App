@@ -12,4 +12,5 @@ WORKDIR /app
 # RUN touch /root/.ssh/known_hosts
 # RUN ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
 RUN pip install -r requirements.txt
+RUN pip install 
 RUN export DJANGO_SETTINGS_MODULE=SubtitleTimeTracker.settings

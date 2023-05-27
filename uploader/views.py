@@ -95,8 +95,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 @csrf_exempt
 def upload_to_s3(request):
-    title=request.POST.get('title','')
-    file=request.FILES.get('document')
+    title = request.POST.get('title','')
+    file = request.FILES.get('document')
 
     bytes_data = file.read()
     import base64
@@ -109,7 +109,8 @@ def upload_to_s3(request):
 
 @csrf_exempt
 def file_name(request):
+    #file_path = file.temporary_file_path()
     file = file=request.FILES.get('document')
-    return JsonResponse({'results': file.name})
+    return JsonResponse({'results': "DOne"})
 
 
