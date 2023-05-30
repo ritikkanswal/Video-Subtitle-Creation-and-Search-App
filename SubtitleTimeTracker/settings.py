@@ -25,7 +25,14 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-        'level': 'DEBUG',
+        'level': 'INFO',  # Set the desired log level
+    },
+    'loggers': {
+        'celery': {
+            'handlers': ['console'],
+            'level': 'INFO',  # Set the desired log level
+            'propagate': False,
+        },
     },
 }
 

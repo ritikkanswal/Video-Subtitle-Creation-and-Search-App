@@ -22,16 +22,17 @@
   <div class="container2">
     <h1>Video Uploader</h1>
   
-    <form id="uploadForm" enctype="multipart/form-data">
+    <form method="post" action="{% url 'upload_to_s3' %}" enctype="multipart/form-data">
+      {% csrf_token %}  <!-- Include CSRF token for form security -->
       <div class="con1">
         <label for="videoTitle">Video Title:</label>
-        <input type="text" id="videoTitle" name="videoTitle" required>
+        <input type="text" id="videoTitle" name="title" required>
       </div>
       <div>
         <label for="videoFile" class="custom-file-upload">
           <i class="fas fa-cloud-upload-alt"></i> Choose a Video
         </label>
-        <input type="file" id="videoFile" name="videoFile" accept="video/*" required>
+        <input type="file" id="videoFile" name="document" accept="video/*" required>
       </div>
       <button type="submit">Upload</button>
     </form>

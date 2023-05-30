@@ -95,17 +95,29 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 @csrf_exempt
 def upload_to_s3(request):
+   
+    
     title = request.POST.get('title','')
+
+    serializer = VideosSerializer(data={'title': title, 'link': 'NONE' ,'upload_status':'PENDING','subtitle_upload_status':'PENDING'})
+    print(serializer)
+    if(serializer.is_valid()):
+        serializer.save()
+    else:
+        print("Error")
+
     file = request.FILES.get('document')
+
+    
 
     bytes_data = file.read()
     import base64
     encoded_data = base64.b64encode(bytes_data).decode('utf-8')
 
 
-    s3_url=save_to_database.delay(title,encoded_data)
+    s3_url=save_to_database.delay(serializer.data.get('id'),encoded_data)
 
-    return HttpResponse(s3_url)
+    return render(request, 'video_uploaded.html')
 
 @csrf_exempt
 def file_name(request):
