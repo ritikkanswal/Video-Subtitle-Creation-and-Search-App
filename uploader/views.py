@@ -16,11 +16,12 @@ from uploader.tasks import save_to_database
 # from uploader.tasks import add_numbers
 import uuid
 
-AWS_ACCESS_KEY_ID = 'AKIAWJLMVLT3WT2NSIN2'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'videos-ecowiser'
-AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_S3_REGION_NAME = 'eu-north-1'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_SIGNATURE_VERSION = os.environ.get('AWS_S3_SIGNATURE_VERSION')
+AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
+BUCKET_NAME = os.environ.get('BUCKET_NAME')
 
 # s3_client = boto3.client('s3')
 dynamodb = boto3.client('dynamodb',
@@ -89,7 +90,7 @@ def search_videos(request):
 
     return JsonResponse({'results': results})
 
-BUCKET_NAME='videos-ecowiser'
+
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.uploadedfile import SimpleUploadedFile
 

@@ -8,12 +8,13 @@ from .models import Videos
 import subprocess
 
 
-AWS_ACCESS_KEY_ID = 'AKIAWJLMVLT3WT2NSIN2'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'videos-ecowiser'
-AWS_S3_SIGNATURE_VERSION = 's3v4'
-AWS_S3_REGION_NAME = 'eu-north-1'
-BUCKET_NAME='videos-ecowiser'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_SIGNATURE_VERSION = os.environ.get('AWS_S3_SIGNATURE_VERSION')
+AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
+BUCKET_NAME = os.environ.get('BUCKET_NAME')
+
 # s3_client = boto3.client('s3')
 dynamodb = boto3.client('dynamodb',
                         aws_access_key_id=AWS_ACCESS_KEY_ID,
@@ -45,16 +46,39 @@ def convert_video_to_subtitle(path,id):
 
     print("completed!!")
 
+    # command = [
+    # 'ffmpeg',
+    # '-y',  # Automatically overwrite output file
+    # '-i', 'media/demo.mp4',
+    # '-scodec', 'mov_text',
+    # '-i', 'media/demo.srt',
+    # 'media/output_video.mkv'
+    # ]
+
+    # command = ['ffmpeg','-y', '-i', 'media/demo.mp4', '-vf', 'subtitles=media/demo.srt', 'output_srt.mp4']
+
+    # subprocess.run(command)
+
+    input_video = "media/demo.mp4"
+    input_subtitles = "media/demo.srt"
+    output_video = "media/output_srt.mp4"
+
     command = [
-    'ffmpeg',
-    '-y',  # Automatically overwrite output file
-    '-i', 'media/demo.mp4',
-    '-scodec', 'mov_text',
-    '-i', 'media/demo.srt',
-    'media/output_video.mkv'
+        "ffmpeg",
+        "-y",
+        "-i", input_video,
+        "-scodec", "mov_text",
+        "-i", input_subtitles,
+        "-map", "0",
+        "-map", "1",
+        "-c", "copy",
+        "-scodec", "mov_text",
+        output_video
     ]
 
-    #subprocess.run(command)
+    subprocess.run(command)
+
+    print("FFMPEG Task Completed!!")
 
 
 def parse_srt_file(file_path, table_name,id):
@@ -79,10 +103,11 @@ def parse_srt_file(file_path, table_name,id):
         start_time = timestamps[0]
         end_time = timestamps[1]
         text = ' '.join(lines[2:])
-
+        
+        unique_key = str(uuid.uuid4())
         # Create an item for the subtitle in the DynamoDB table
         item = {
-            'id': {'S': str(index)},  
+            'id': {'S': unique_key},  
             'video_id': {'S': str(id)},  
             'start_time': {'S': start_time},
             'end_time': {'S': end_time},
@@ -126,7 +151,8 @@ def save_to_database(id,encoded_data):
 
     filtered_data.save()
 
-    file_path='media/demo.mp4'
+    file_path='media/output_srt.mp4'
+    # file_path='media/demo.mp4'
     try:
         
         unique_key = str(uuid.uuid4())
